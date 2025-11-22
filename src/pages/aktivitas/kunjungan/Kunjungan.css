@@ -1,0 +1,77 @@
+/* CONTENT STYLES */
+.page-content {
+    padding: 2.5rem 0 4rem;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-family: 'Lato', sans-serif;
+}
+
+/* GRID KUNJUNGAN */
+.visit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.visit-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.visit-card {
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.visit-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.visit-image-container {
+    width: 100%;
+    height: 180px;
+    max-width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.visit-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+}
+
+.visit-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}

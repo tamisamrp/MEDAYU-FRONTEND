@@ -1,0 +1,95 @@
+:root {
+    --primary-color: #0F8EC8;
+    --link-color: #ffffff;
+    --hover-color: #c1e5ff;
+}
+
+.main-footer {
+  background-color: var(--primary-color);
+  padding: 40px 0 0;
+  color: var(--link-color);
+  border-top: 3px solid var(--primary-color);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 0 40px 30px;
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: var(--link-color);
+}
+
+.footer-column p {
+  margin: 6px 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+  color: var(--link-color);
+  cursor: default; 
+}
+
+.footer-column p a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.map-placeholder iframe {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.copyright-bar {
+  background-color: var(--primary-color);
+  padding: 12px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--link-color);
+  border-top: 1px solid var(--link-color);
+}
+
+.footer-column p a:hover {
+  color: var(--hover-color);
+}
+
+.footer-column p a:hover .icon svg {
+  transform: scale(1.15);
+}
+
+.footer-column .icon svg {
+  transition: transform 0.3s;
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px 30px;
+  }
+
+  .footer-column h3 {
+    margin-top: 10px;
+  }
+}
