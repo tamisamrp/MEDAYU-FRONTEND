@@ -1,0 +1,7 @@
+# set akhir baris default untuk semua file teks ke LF
+* text=auto eol=lf
+
+# file non-teks (binary) seperti gambar atau zip tidak diproses
+*.jpg binary
+*.png binary
+*.zip binary

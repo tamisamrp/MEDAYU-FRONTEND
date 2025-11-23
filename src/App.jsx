@@ -19,7 +19,11 @@ import KategoriArtikel from "./pages/aktivitas/artikel/KategoriArtikel";
 import TagArtikel from "./pages/aktivitas/artikel/TagArtikel";
 import Kunjungan from "./pages/aktivitas/kunjungan/Kunjungan";
 import DetailKunjungan from "./pages/aktivitas/kunjungan/DetailKunjungan";
-import Koran from "./pages/koleksi/Koran";
+import PencarianBukuMajalah from "./pages/koleksi/BukuMajalah/PencarianBukuMajalah";
+import DetailBuku from "./pages/koleksi/BukuMajalah/DetailBuku";
+import DetailMajalah from "./pages/koleksi/BukuMajalah/DetailMajalah";
+import PencarianKoran from "./pages/koleksi/Koran/PencarianKoran";
+
 
 function App() {
   return (
@@ -49,7 +53,10 @@ function App() {
             <Route path="/aktivitas/kunjungan/detailkunjungan" element={<DetailKunjungan />} />
 
             {/* Koleksi */}
-            <Route path="/koleksi/koran" element={<Koran />} />
+            <Route path="/koleksi/bukumajalah/pencarianbukumajalah" element={<PencarianBukuMajalah />} />
+            <Route path="/koleksi/bukumajalah/detailbuku" element={<DetailBuku />} />
+            <Route path="/koleksi/bukumajalah/detailmajalah" element={<DetailMajalah />} />
+            <Route path="/koleksi/koran/pencariankoran" element={<PencarianKoran />} />
             
           </Routes>
         </div>

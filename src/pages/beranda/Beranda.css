@@ -26,7 +26,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Overlay gelap */
+  background-color: rgba(0, 0, 0, 03); /* overlay gelap */
 }
  
 .slide:nth-child(1) { animation-delay: 0s; }

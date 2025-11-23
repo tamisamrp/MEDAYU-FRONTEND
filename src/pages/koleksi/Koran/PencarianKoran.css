@@ -1,0 +1,359 @@
+:root {
+    --primary-color: #0F8EC8;
+    --secondary-color: #E6F3FA;
+    --dark-color: #343a40;
+    --light-color: #f8f9fa;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+}
+
+body {
+    margin: 0;
+    background-color: var(--light-color); 
+    color: var(--dark-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.hero-koran-search {
+    background-image: url("../../../assets/3.webp");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 5rem 0 3rem; 
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    min-height: 350px;
+}
+
+.hero-koran-search::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: -1;
+}
+
+.hero-koran-search h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.hero-koran-search p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+/* Form Koran Search */
+.koran-search-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.koran-filters-wrapper {
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.koran-filters-wrapper .filter-group {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    border-right: 1px solid #eee;
+}
+
+.koran-filters-wrapper .filter-group:nth-child(3) {
+    border-right: none;
+}
+
+.koran-filters-wrapper .material-symbols-rounded {
+    color: #777;
+    margin-right: 8px;
+    font-size: 1.5rem;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; /* Add default material settings */
+}
+
+.koran-filters-wrapper .koran-input,
+.koran-filters-wrapper .koran-select {
+    flex-grow: 1;
+    border: none;
+    padding: 10px 0;
+    font-size: 1rem;
+    outline: none;
+    color: var(--dark-color);
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+
+/* Select/Dropdown styling */
+.koran-filters-wrapper .filter-group:first-child {
+    position: relative;
+}
+.koran-filters-wrapper .filter-group:first-child::after {
+    content: "keyboard_arrow_down";
+    font-family: 'Material Symbols Rounded';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.5rem;
+    line-height: 1;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    right: 10px;
+    color: #777;
+    pointer-events: none; 
+}
+
+
+.koran-filters-wrapper .btn-cari {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    flex-shrink: 0;
+}
+.koran-filters-wrapper .btn-cari:hover {
+    background-color: #0c729c;
+}
+
+/* --- STYLES FOR KORAN COLLECTION GRID & RESULTS --- */
+
+.page-content {
+    padding: 3rem 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: 2rem;
+}
+
+/* Koran Grid Styles (Default View) */
+#koranCategories .section-title {
+     margin-top: 0;
+}
+.koran-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+.koran-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    text-decoration: none;
+    color: var(--dark-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+.koran-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.koran-image-wrapper {
+    width: 100%;
+    height: 200px;
+    background-color: #f0f0f0;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    background-image: url('https://via.placeholder.com/250x200/dddddd/343a40?text=Cover+Koran'); 
+    background-size: cover;
+    background-position: center;
+}
+.koran-info {
+    padding: 15px;
+}
+.koran-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Koran Results Table Styles */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.results-header .section-title {
+    margin-bottom: 0;
+}
+.btn-hapus {
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+.btn-hapus:hover {
+    background-color: rgba(220, 53, 69, 0.05);
+}
+.btn-hapus .material-symbols-rounded {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+.koran-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-bottom: 3rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.koran-results-table th, .koran-results-table td {
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    font-size: 1rem;
+}
+.koran-results-table th {
+    background-color: #f0f0f0;
+    font-weight: 600;
+    color: var(--dark-color);
+    border-top: none;
+}
+.koran-results-table tr:nth-child(even) td {
+    background-color: #fcfcfc;
+}
+
+.ketersediaan-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+.tersedia {
+    background-color: var(--success-color);
+    color: white;
+}
+
+/* --- RESPONSIVE STYLES (Disesuaikan) --- */
+
+@media (max-width: 768px) {
+    
+    .hero-koran-search {
+        padding: 3rem 0 2rem; 
+        min-height: 250px;
+    }
+    .hero-koran-search h1 {
+        font-size: 2rem;
+    }
+    .koran-filters-wrapper {
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .koran-filters-wrapper .filter-group {
+        flex: 1 1 100%; 
+        border-right: none; 
+    }
+    
+    .koran-filters-wrapper .btn-cari {
+        flex: 1 1 100%; 
+        padding: 12px 20px;
+    }
+
+    .koran-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    /* Table Responsive */
+    .koran-results-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .koran-results-table thead, .koran-results-table tbody, .koran-results-table th, .koran-results-table td, .koran-results-table tr {
+        display: block;
+    }
+    .koran-results-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .koran-results-table tr {
+        margin: 0 0 1rem 0;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    .koran-results-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        font-size: 0.9rem;
+    }
+    .koran-results-table td:before {
+        position: absolute;
+        top: 0;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        content: attr(data-label);
+        font-weight: 600;
+        text-align: left;
+        color: var(--primary-color);
+        padding-top: 15px;
+    }
+    .koran-results-table td:last-child {
+        border-bottom: none;
+    }
+    
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    .koran-grid {
+        grid-template-columns: 1fr; 
+    }
+}
