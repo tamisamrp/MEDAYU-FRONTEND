@@ -4,20 +4,19 @@ import "./DetailKunjungan.css";
 
 function DetailKunjungan() {
   const { slug } = useParams(); 
-  // slug = "judul-kunjungan-1" misalnyaa
+  
+  const displayTitle = slug?.replace(/-/g, " ") || 'Judul Kunjungan Tidak Ditemukan';
 
   return (
     <main className="page-content">
       <div className="container">
-        <div className="visit-detail-container">
-
-          {/* Tombol Kembali */}
-          <Link to="/kunjungan" className="back-button">
+        <Link to="/kunjungan" className="btn-kembali">
             ← Kembali
-          </Link>
+        </Link>
+        <div className="visit-detail-container">  
 
           <h1 className="visit-title">
-            Detail Kunjungan — {slug.replace(/-/g, " ")}
+            Detail Kunjungan — {displayTitle}
           </h1>
 
           <p className="visit-description">
@@ -25,7 +24,6 @@ function DetailKunjungan() {
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
 
-          {/* GALERI FOTO */}
           <section className="visit-gallery-grid">
             <div className="gallery-image-placeholder">Foto Kunjungan 1</div>
             <div className="gallery-image-placeholder">Foto Kunjungan 2</div>

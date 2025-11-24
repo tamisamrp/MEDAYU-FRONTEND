@@ -102,7 +102,6 @@ body {
     background: transparent;
 }
 
-/* Select/Dropdown styling */
 .koran-filters-wrapper .filter-group:first-child {
     position: relative;
 }
@@ -142,7 +141,6 @@ body {
     background-color: #0c729c;
 }
 
-/* --- STYLES FOR KORAN COLLECTION GRID & RESULTS --- */
 
 .page-content {
     padding: 3rem 0;
@@ -155,7 +153,6 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Koran Grid Styles (Default View) */
 #koranCategories .section-title {
      margin-top: 0;
 }
@@ -199,7 +196,6 @@ body {
     margin: 0;
 }
 
-/* Koran Results Table Styles */
 .results-header {
     display: flex;
     justify-content: space-between;
@@ -264,8 +260,6 @@ body {
     background-color: var(--success-color);
     color: white;
 }
-
-/* --- RESPONSIVE STYLES (Disesuaikan) --- */
 
 @media (max-width: 768px) {
     

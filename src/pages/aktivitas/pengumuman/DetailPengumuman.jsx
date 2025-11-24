@@ -6,21 +6,16 @@ function DetailPengumuman() {
   return (
     <main>
       <div className="container">
-        <h1 className="page-title">Pengumuman</h1>
+        <Link to="/aktivitas/pengumuman" className="back-button">
+            ← Kembali
+        </Link>
+        <h1 className="page-title">Judul Pengumuman</h1>
 
         <div className="detail-card-announcement">
-
-          <Link to="/aktivitas/pengumuman" className="back-button">
-            ← Kembali
-          </Link>
 
           <div className="announcement-image-container">
             Gambar Cover Pengumuman
           </div>
-
-          <h2 className="announcement-title-detail">
-            Judul Pengumuman
-          </h2>
 
           <div className="announcement-description">
             <p>

@@ -9,12 +9,10 @@ function Magang() {
 
         <section className="magang-section">
           
-          {/* Gambar Utama */}
           <div className="magang-image-container">
             Gambar
           </div>
 
-          {/* Deskripsi Magang */}
           <h2 className="magang-sub-heading">Magang di Perpustakaan Medayu Agung</h2>
 
           <div className="magang-description">
@@ -24,7 +22,6 @@ function Magang() {
             </p>
           </div>
 
-          {/* Kegiatan Magang */}
           <h2 className="magang-sub-heading">Kegiatan Magang</h2>
 
           <div className="kegiatan-grid">

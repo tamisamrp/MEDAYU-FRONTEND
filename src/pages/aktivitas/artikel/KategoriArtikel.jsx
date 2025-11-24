@@ -18,11 +18,10 @@ const KategoriArtikel = () => {
         <h1 className="page-title">
           <Link to="/aktivitas/artikel">Artikel</Link>
           <span>&gt;</span>
-          Kategori Sejarah
+          <span>Kategori Sejarah</span>
         </h1>
 
         <section className="category-grid">
-
           {dummyArticles.map(article => (
             <Link
               to={`/artikel/detail/${article.id}`}
@@ -39,7 +38,6 @@ const KategoriArtikel = () => {
               </div>
             </Link>
           ))}
-
         </section>
       </div>
     </main>

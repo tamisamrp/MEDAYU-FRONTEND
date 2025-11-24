@@ -37,7 +37,6 @@
     margin-right: auto;
 }
 
-/* Gambar Besar */
 .magang-image-container {
     width: 100%;
     max-width: 800px;
@@ -58,7 +57,6 @@
     object-fit: cover;
 }
 
-/* Deskripsi */
 .magang-description p {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -69,6 +67,6 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem; /* Margin kanan-kiri */
+    padding: 0 1.5rem;
 }
 

@@ -7,7 +7,6 @@ function DetailMagang() {
     <main>
       <div className="container">
 
-        {/* Tombol Kembali */}
         <Link to="/aktivitas/magang" className="btn-kembali">
           ← Kembali
         </Link>

@@ -8,12 +8,17 @@
     color: var(--dark-color);
     margin-top: 0;
     margin-bottom: 2rem;
-    font-family: 'Lato', sans-serif;
+}
+
+.page-title a,
+.page-title span {
+    font-size: inherit;
+    font-weight: inherit;
+    text-decoration: none;
 }
 
 .page-title a {
     color: var(--dark-color);
-    text-decoration: none;
     transition: color 0.3s;
 }
 
@@ -61,7 +66,6 @@
     justify-content: center;
     align-items: center;
     color: #777;
-    font-family: 'Lato', sans-serif;
     font-size: 1rem;
 }
 
@@ -86,7 +90,6 @@
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 0.85rem;
-    font-family: 'Lato', sans-serif;
     font-weight: 600;
     white-space: nowrap;
 }

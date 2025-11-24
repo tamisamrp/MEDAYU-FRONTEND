@@ -19,7 +19,7 @@ const TagArtikel = () => {
         <h1 className="page-title">
           <Link to="/aktivitas/artikel">Artikel</Link>
           <span>&gt;</span>
-          Tag Sejarah
+          <span>Tag Sejarah</span>
         </h1>
 
         <section className="tag-grid">

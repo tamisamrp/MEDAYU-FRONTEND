@@ -29,7 +29,6 @@ function DetailArtikel() {
 
         <div className="article-main-container">
 
-          {/* Meta Header */}
           <div className="article-header-meta">
             <a href="/aktivitas/artikel/kategoriartikel" className="article-category">
               Kategori
@@ -44,12 +43,10 @@ function DetailArtikel() {
             </p>
           </div>
 
-          {/* Main Image */}
           <div className="article-image-main">
             Gambar Utama Artikel
           </div>
 
-          {/* Content */}
           <div className="article-content">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...
@@ -62,7 +59,6 @@ function DetailArtikel() {
             </p>
           </div>
 
-          {/* Tags Section */}
           <div className="article-tags">
             <span>Tag:</span>
 
@@ -72,7 +68,6 @@ function DetailArtikel() {
           </div>
         </div>
 
-        {/* Related Articles */}
         <section className="related-articles-section">
           <h2>Artikel Terkait</h2>
 

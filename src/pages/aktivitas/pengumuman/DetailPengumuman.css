@@ -13,7 +13,8 @@
     margin-bottom: 3rem;
 }
 
-.back-button {
+
+.btn-kembali {
   display: inline-block;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -26,7 +27,7 @@
   transition: 0.2s ease;
 }
 
-.back-button:hover {
+.btn-kembali:hover {
   background-color: #d4d4d4;
 }
 
@@ -44,12 +45,6 @@
 
     font-size: 1.5rem;
     color: #aaa;
-}
-
-.announcement-title-detail {
-    color: var(--primary-color);
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
 }
 
 .announcement-description p {
