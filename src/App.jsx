@@ -53,10 +53,10 @@ function App() {
             <Route path="/aktivitas/kunjungan/detailkunjungan" element={<DetailKunjungan />} />
 
             {/* Koleksi */}
-            <Route path="/koleksi/bukumajalah/pencarianbukumajalah" element={<PencarianBukuMajalah />} />
+            <Route path="/koleksi/bukumajalah" element={<PencarianBukuMajalah />} />
             <Route path="/koleksi/bukumajalah/detailbuku" element={<DetailBuku />} />
             <Route path="/koleksi/bukumajalah/detailmajalah" element={<DetailMajalah />} />
-            <Route path="/koleksi/koran/pencariankoran" element={<PencarianKoran />} />
+            <Route path="/koleksi/koran" element={<PencarianKoran />} />
             
           </Routes>
         </div>

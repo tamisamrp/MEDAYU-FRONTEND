@@ -5,25 +5,25 @@ import './PencarianBukuMajalah.css';
 const collectionData = `
     <h2 class="results-title">Hasil Pencarian</h2>
     <div class="collection-grid">
-        <a href="/koleksi/detail/buku/bumi-manusia" class="collection-card">
+        <a href="/koleksi/bukumajalah/detailbuku" class="collection-card">
             <span class="collection-type-badge">Buku</span>
             <div class="collection-image-wrapper"></div>
             <h3>Bumi Manusia</h3>
             <p>Pramoedya Ananta Toer</p>
         </a>
-        <a href="/koleksi/detail/buku/anak-semua-bangsa" class="collection-card">
+        <a href="/koleksi/bukumajalah/detailbuku" class="collection-card">
             <span class="collection-type-badge">Buku</span>
             <div class="collection-image-wrapper"></div>
             <h3>Anak Semua Bangsa</h3>
             <p>Pramoedya Ananta Toer</p>
         </a>
-        <a href="/koleksi/detail/majalah/tempo-toleransi" class="collection-card">
+        <a href="/koleksi/bukumajalah/detailmajalah" class="collection-card">
             <span class="collection-type-badge majalah">Majalah</span>
             <div class="collection-image-wrapper"></div>
             <h3>Tempo: Toleransi dalam Al-Qur'an</h3>
             <p>Majalah Tempo</p>
         </a>
-        <a href="/koleksi/detail/majalah/tempo-maut" class="collection-card">
+        <a href="/koleksi/bukumajalah/detailmajalah" class="collection-card">
             <span class="collection-type-badge majalah">Majalah</span>
             <div class="collection-image-wrapper"></div>
             <h3>Kuwat Melebihi Maut</h3>
@@ -46,25 +46,25 @@ const topCategories = (
 
         <h2 className="category-title">Buku Teratas</h2>
         <div className="collection-grid">
-            <Link to="/koleksi/detail/buku/bumi-manusia" className="collection-card">
+            <Link to="/koleksi/bukumajalah/detailbuku" className="collection-card">
                 <span className="collection-type-badge">Buku</span>
                 <div className="collection-image-wrapper"></div>
                 <h3>Bumi Manusia</h3>
                 <p>Pramoedya Ananta Toer</p>
             </Link>
-            <Link to="/koleksi/detail/buku/anak-semua-bangsa" className="collection-card">
+            <Link to="/koleksi/bukumajalah/detailbuku" className="collection-card">
                 <span className="collection-type-badge">Buku</span>
                 <div className="collection-image-wrapper"></div>
                 <h3>Anak Semua Bangsa</h3>
                 <p>Pramoedya Ananta Toer</p>
             </Link>
-            <Link to="/koleksi/detail/buku/jalan-tak-ada-ujung" className="collection-card">
+            <Link to="/koleksi/bukumajalah/detailbuku" className="collection-card">
                 <span className="collection-type-badge">Buku</span>
                 <div className="collection-image-wrapper"></div>
                 <h3>Jalan Tak Ada Ujung</h3>
                 <p>Mochtar Lubis</p>
             </Link>
-            <Link to="/koleksi/detail/buku/langit-jakarta" className="collection-card">
+            <Link to="/koleksi/bukumajalah/detailbuku" className="collection-card">
                 <span className="collection-type-badge">Buku</span>
                 <div className="collection-image-wrapper"></div>
                 <h3>Di Bawah Langit Jakarta</h3>
@@ -74,25 +74,25 @@ const topCategories = (
 
         <h2 className="category-title">Majalah Teratas</h2>
         <div className="collection-grid">
-            <Link to="/koleksi/detail/majalah/tempo-1" className="collection-card">
+            <Link to="/koleksi/bukumajalah/detailmajalah" className="collection-card">
                 <span className="collection-type-badge majalah">Majalah</span>
                 <div className="collection-image-wrapper"></div>
                 <h3>Majalah Tempo Edisi 1</h3>
                 <p>Tempo</p>
             </Link>
-            <Link to="/koleksi/detail/majalah/tempo-2" className="collection-card">
+            <Link to="/koleksi/bukumajalah/detailmajalah" className="collection-card">
                 <span className="collection-type-badge majalah">Majalah</span>
                 <div className="collection-image-wrapper"></div>
                 <h3>Majalah Tempo Edisi 2</h3>
                 <p>Tempo</p>
             </Link>
-            <Link to="/koleksi/detail/majalah/tempo-3" className="collection-card">
+            <Link to="/koleksi/bukumajalah/detailmajalah" className="collection-card">
                 <span className="collection-type-badge majalah">Majalah</span>
                 <div className="collection-image-wrapper"></div>
                 <h3>Majalah Tempo Edisi 3</h3>
                 <p>Tempo</p>
             </Link>
-            <Link to="/koleksi/detail/majalah/tempo-4" className="collection-card">
+            <Link to="/koleksi/bukumajalah/detailmajalah" className="collection-card">
                 <span className="collection-type-badge majalah">Majalah</span>
                 <div className="collection-image-wrapper"></div>
                 <h3>Majalah Tempo Edisi 4</h3>

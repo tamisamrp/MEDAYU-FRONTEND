@@ -76,11 +76,7 @@ const Footer = () => {
           <h3>Lokasi</h3>
           <p>
             {/* LOKASI LINK */}
-            <a 
-                href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3957.194645894869!2d112.798392!3d-7.332024!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fabae2a79dfd%3A0x4e83946c0902473a!2sPerpustakaan%20Medayu%20Agung!5e0!3m2!1sid!2sid!4v1754628230553!5m2!1sid!2sid" 
-                target="_blank" 
-                rel="noopener noreferrer"
-            >
+            <a>
               <span className="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-geo-alt" viewBox="0 0 16 16">
                   <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
