@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./Beranda.css";
 import SliderImage from "../../assets/slider.webp";
 import Slide1 from "../../assets/1.webp";
-import QrCodeDonasi from "../../assets/QRIS.jpg";
+import QrCodeDonasi from "../../assets/QRIS.jpeg";
 
 function Beranda() {
   const [slides, setSlides] = useState([SliderImage]);
@@ -369,8 +369,8 @@ function Beranda() {
             <div className="bank-info">
               <p className="bank-description">Transfer ke bank dapat menggunakan:</p>
               <h3>Bank BCA</h3>
-              <p className="account-number">1234567890</p>
-              <p className="account-name">a.n. Yayasan Medayu Agung Surabaya</p>
+              <p className="account-number">822-2788322</p>
+              <p className="account-name">a.n. Yayasan Medayu Agung</p>
             </div>
           </div>
 
