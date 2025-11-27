@@ -42,9 +42,9 @@ function Navbar() {
               </svg>
             </label>
             <ul className="dropdown-menu">
-              <li><NavLink to="/profil/pembina" className="nav-link" onClick={closeMenu}>Pembina</NavLink></li>
-              <li><NavLink to="/profil/pengawas" className="nav-link" onClick={closeMenu}>Pengawas</NavLink></li>
-              <li><NavLink to="/profil/pengurus" className="nav-link" onClick={closeMenu}>Pengurus</NavLink></li>
+              <li><NavLink to="/pembina" className="nav-link" onClick={closeMenu}>Pembina</NavLink></li>
+              <li><NavLink to="/pengawas" className="nav-link" onClick={closeMenu}>Pengawas</NavLink></li>
+              <li><NavLink to="/pengurus" className="nav-link" onClick={closeMenu}>Pengurus</NavLink></li>
             </ul>
           </li>
 
@@ -57,10 +57,10 @@ function Navbar() {
               </svg>
             </label>
             <ul className="dropdown-menu">
-              <li><NavLink to="/aktivitas/magang" className="nav-link" onClick={closeMenu}>Magang</NavLink></li>
-              <li><NavLink to="/aktivitas/pengumuman" className="nav-link" onClick={closeMenu}>Pengumuman</NavLink></li>
-              <li><NavLink to="/aktivitas/artikel" className="nav-link" onClick={closeMenu}>Artikel</NavLink></li>
-              <li><NavLink to="/aktivitas/kunjungan" className="nav-link" onClick={closeMenu}>Kunjungan</NavLink></li>
+              <li><NavLink to="/pengumuman" className="nav-link" onClick={closeMenu}>Pengumuman</NavLink></li>
+              <li><NavLink to="/artikel" className="nav-link" onClick={closeMenu}>Artikel</NavLink></li>
+              {/* <li><NavLink to="/magang" className="nav-link" onClick={closeMenu}>Magang</NavLink></li>
+              <li><NavLink to="/kunjungan" className="nav-link" onClick={closeMenu}>Kunjungan</NavLink></li> */}
             </ul>
           </li>
 
@@ -73,8 +73,8 @@ function Navbar() {
               </svg>
             </label>
             <ul className="dropdown-menu">
-              <li><NavLink to="/koleksi/bukumajalah" className="nav-link" onClick={closeMenu}>Buku & Majalah</NavLink></li>
-              <li><NavLink to="/koleksi/koran" className="nav-link" onClick={closeMenu}>Koran</NavLink></li>
+              {/* <li><NavLink to="/buku-majalah" className="nav-link" onClick={closeMenu}>Buku & Majalah</NavLink></li> */}
+              <li><NavLink to="/koran" className="nav-link" onClick={closeMenu}>Koran</NavLink></li>
             </ul>
           </li>
         </ul>
