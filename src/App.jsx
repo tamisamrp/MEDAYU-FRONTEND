@@ -36,27 +36,27 @@ function App() {
             <Route path="/" element={<Beranda />} />
 
             {/* Profil */}
-            <Route path="/profil/pembina" element={<Pembina />} />
-            <Route path="/profil/pengawas" element={<Pengawas />} />
-            <Route path="/profil/pengurus" element={<Pengurus />} />
+            <Route path="/pembina" element={<Pembina />} />
+            <Route path="/pengawas" element={<Pengawas />} />
+            <Route path="/pengurus" element={<Pengurus />} />
 
             {/* Aktvitas */}
-            <Route path="/aktivitas/magang" element={<Magang />} />
-            <Route path="/aktivitas/magang/detailmagang" element={<DetailMagang />} />
-            <Route path="/aktivitas/pengumuman" element={<Pengumuman />} />
-            <Route path="/aktivitas/pengumuman/detailpengumuman" element={<DetailPengumuman />} />
-            <Route path="/aktivitas/artikel" element={<Artikel />} />
-            <Route path="/aktivitas/artikel/detailartikel" element={<DetailArtikel />} />
-            <Route path="/aktivitas/artikel/kategoriartikel" element={<KategoriArtikel />} />
-            <Route path="/aktivitas/artikel/tagartikel" element={<TagArtikel />} />
-            <Route path="/aktivitas/kunjungan" element={<Kunjungan />} />
-            <Route path="/aktivitas/kunjungan/detailkunjungan" element={<DetailKunjungan />} />
+            <Route path="/magang" element={<Magang />} />
+            <Route path="/magang/detailmagang" element={<DetailMagang />} />
+            <Route path="/pengumuman" element={<Pengumuman />} />
+            <Route path="/pengumuman/detailpengumuman" element={<DetailPengumuman />} />
+            <Route path="/artikel" element={<Artikel />} />
+            <Route path="/artikel/detailartikel" element={<DetailArtikel />} />
+            <Route path="/artikel/kategoriartikel" element={<KategoriArtikel />} />
+            <Route path="/artikel/tagartikel" element={<TagArtikel />} />
+            <Route path="/kunjungan" element={<Kunjungan />} />
+            <Route path="/kunjungan/detailkunjungan" element={<DetailKunjungan />} />
 
             {/* Koleksi */}
-            <Route path="/koleksi/bukumajalah" element={<PencarianBukuMajalah />} />
-            <Route path="/koleksi/bukumajalah/detailbuku" element={<DetailBuku />} />
-            <Route path="/koleksi/bukumajalah/detailmajalah" element={<DetailMajalah />} />
-            <Route path="/koleksi/koran" element={<PencarianKoran />} />
+            <Route path="/bukumajalah" element={<PencarianBukuMajalah />} />
+            <Route path="/buku-majalah/detailbuku" element={<DetailBuku />} />
+            <Route path="/buku-majalah/detailmajalah" element={<DetailMajalah />} />
+            <Route path="/koran" element={<PencarianKoran />} />
             
           </Routes>
         </div>

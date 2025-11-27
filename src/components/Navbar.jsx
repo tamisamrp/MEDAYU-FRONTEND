@@ -1,63 +1,82 @@
-import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
+import LogoDesktop from "../assets/LogoAndText_medayuagung.webp";
+import IconMobile from "../assets/icon_medayuagung.svg";
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    if (menuToggle) {
+      menuToggle.checked = false;
+    }
+  };
 
   return (
     <nav className="nav-container">
       <div className="nav-content">
-
-        {/* Logo */}
-        <Link to="/" className="nav-logo">
-          Medayu Agung
+        <Link to="/" className="nav-logo" onClick={closeMenu}>
+          <img src={LogoDesktop} alt="Medayu Agung" className="nav-logo-desktop" />
+          <img src={IconMobile} alt="Medayu Agung" className="nav-logo-mobile" />
         </Link>
 
-        <div
-          className="hamburger"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </div>
+        <input type="checkbox" id="menu-toggle" className="menu-toggle" />
+        <label htmlFor="menu-toggle" className="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
 
-        {/* Menu */}
-        <ul className={menuOpen ? "nav-links active" : "nav-links"}>
+        <label htmlFor="menu-toggle" className="nav-overlay"></label>
 
+        <ul className="nav-links">
           <li>
-            <NavLink to="/" className="nav-link">Beranda</NavLink>
+            <NavLink to="/" className="nav-link" onClick={closeMenu}>Beranda</NavLink>
           </li>
 
-          {/* Dropdown Profil */}
           <li className="dropdown">
-            <span className="nav-link">Profil ▾</span>
+            <input type="checkbox" id="dropdown-profil" className="dropdown-checkbox" />
+            <label htmlFor="dropdown-profil" className="nav-link dropdown-toggle">
+              Profil
+              <svg className="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </label>
             <ul className="dropdown-menu">
-              <li><NavLink to="/profil/pembina">Pembina</NavLink></li>
-              <li><NavLink to="/profil/pengawas">Pengawas</NavLink></li>
-              <li><NavLink to="/profil/pengurus">Pengurus</NavLink></li>
+              <li><NavLink to="/pembina" className="nav-link" onClick={closeMenu}>Pembina</NavLink></li>
+              <li><NavLink to="/pengawas" className="nav-link" onClick={closeMenu}>Pengawas</NavLink></li>
+              <li><NavLink to="/pengurus" className="nav-link" onClick={closeMenu}>Pengurus</NavLink></li>
             </ul>
           </li>
 
-          {/* Dropdown Aktivitas */}
           <li className="dropdown">
-            <span className="nav-link">Aktivitas ▾</span>
+            <input type="checkbox" id="dropdown-aktivitas" className="dropdown-checkbox" />
+            <label htmlFor="dropdown-aktivitas" className="nav-link dropdown-toggle">
+              Aktivitas
+              <svg className="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </label>
             <ul className="dropdown-menu">
-              <li><NavLink to="/aktivitas/magang">Magang</NavLink></li>
-              <li><NavLink to="/aktivitas/pengumuman">Pengumuman</NavLink></li>
-              <li><NavLink to="/aktivitas/artikel">Artikel</NavLink></li>
-              <li><NavLink to="/aktivitas/kunjungan">Kunjungan</NavLink></li>
+              <li><NavLink to="/pengumuman" className="nav-link" onClick={closeMenu}>Pengumuman</NavLink></li>
+              <li><NavLink to="/artikel" className="nav-link" onClick={closeMenu}>Artikel</NavLink></li>
+              {/* <li><NavLink to="/magang" className="nav-link" onClick={closeMenu}>Magang</NavLink></li>
+              <li><NavLink to="/kunjungan" className="nav-link" onClick={closeMenu}>Kunjungan</NavLink></li> */}
             </ul>
           </li>
 
-          {/* Koleksi */}
           <li className="dropdown">
-            <span className="nav-link">Koleksi ▾</span>
+            <input type="checkbox" id="dropdown-koleksi" className="dropdown-checkbox" />
+            <label htmlFor="dropdown-koleksi" className="nav-link dropdown-toggle">
+              Koleksi
+              <svg className="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </label>
             <ul className="dropdown-menu">
-              <li><NavLink to="/koleksi/bukumajalah">Buku & Majalah</NavLink></li>
-              <li><NavLink to="/koleksi/koran">Koran</NavLink></li>
+              {/* <li><NavLink to="/buku-majalah" className="nav-link" onClick={closeMenu}>Buku & Majalah</NavLink></li> */}
+              <li><NavLink to="/koran" className="nav-link" onClick={closeMenu}>Koran</NavLink></li>
             </ul>
           </li>
-
         </ul>
       </div>
     </nav>

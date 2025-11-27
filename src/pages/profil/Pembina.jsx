@@ -9,7 +9,7 @@ const Pembina = () => {
   useEffect(() => {
     const fetchPembina = async () => {
       try {
-        const response = await fetch("http://localhost:4201/API/pembina");
+        const response = await fetch(`${import.meta.env.VITE_API_PENGELOAAN_KONTEN}/API/pembina`);
         if (!response.ok) {
           throw new Error("Gagal mengambil data pembina");
         }
@@ -63,7 +63,7 @@ const Pembina = () => {
                     <div className="pembina-card-image">
                       {pembina.foto && (
                         <img
-                          src={`http://localhost:4201/images/anggota/${pembina.foto}`}
+                          src={`${import.meta.env.VITE_API_PENGELOAAN_KONTEN}/images/anggota/${pembina.foto}`}
                           alt={pembina.nama}
                           loading="lazy"
                         />

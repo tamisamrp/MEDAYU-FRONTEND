@@ -9,7 +9,7 @@ const Pengawas = () => {
   useEffect(() => {
     const fetchPengawas = async () => {
       try {
-        const response = await fetch("http://localhost:4201/API/pengawas");
+        const response = await fetch(`${import.meta.env.VITE_API_PENGELOAAN_KONTEN}/API/pengawas`);
         if (!response.ok) {
           throw new Error("Gagal mengambil data pengawas");
         }
@@ -63,7 +63,7 @@ const Pengawas = () => {
                     <div className="pengawas-card-image">
                       {pengawas.foto && (
                         <img
-                          src={`http://localhost:4201/images/anggota/${pengawas.foto}`}
+                          src={`${import.meta.env.VITE_API_PENGELOAAN_KONTEN}/images/anggota/${pengawas.foto}`}
                           alt={pengawas.nama}
                           loading="lazy"
                         />
