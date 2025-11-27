@@ -1,93 +1,189 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+
 import "./DetailArtikel.css"; 
 
-function DetailArtikel() {
-  const relatedArticles = [
-    {
-      title: "Sejarah Kuno: Penemuan Baru di Indonesia",
-      author: "Wulan",
-      date: "15 July 2025",
-      link: "/artikel/detail/sejarah-kuno",
-    },
-    {
-      title: "Masa Depan Perpustakaan Digital",
-      author: "Fulan",
-      date: "10 June 2025",
-      link: "/artikel/detail/perpustakaan-digital",
-    },
-    {
-      title: "Mengapa Arsip Lokal Penting?",
-      author: "Fulan",
-      date: "10 June 2025",
-      link: "/artikel/detail/arsip-lokal",
-    },
-  ];
+const DetailArtikel = () => {
+  const { tautan } = useParams();
+  const navigate = useNavigate();
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [tautan]);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_BLOG || import.meta.env.VITE_API_PENGELOAAN_KONTEN;
+        const response = await fetch(`${apiUrl}/API/blog/${tautan}`);
+        if (!response.ok) {
+          throw new Error("Gagal mengambil data blog");
+        }
+
+        const data = await response.json();
+        setBlog(data?.data || null);
+      } catch (err) {
+        console.error(err);
+        setError(err.message || "Terjadi kesalahan");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (tautan) {
+      fetchBlog();
+    }
+  }, [tautan]);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('id-ID', options);
+  };
+
+  if (loading) {
+  return (
+      <main className="blog-detail-main">
+        <section className="blog-detail-section">
+          <div className="blog-detail-skeleton">
+            <div className="blog-detail-skeleton-header" />
+            <div className="blog-detail-skeleton-image" />
+            <div className="blog-detail-skeleton-content" />
+            <div className="blog-detail-skeleton-content" />
+            <div className="blog-detail-skeleton-content" />
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  if (error || !blog) {
+    return (
+      <main className="blog-detail-main">
+        <section className="blog-detail-section">
+          <div className="blog-detail-state blog-detail-state-error">
+            <p>{error || "Blog tidak ditemukan"}</p>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
-    <main className="page-content">
-      <div className="container">
+    <main className="blog-detail-main">
+      <section className="blog-detail-section">
+        <button className="blog-detail-back-button" onClick={() => navigate("/blog")}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span>Kembali</span>
+        </button>
 
-        <div className="article-main-container">
+        <article className="blog-detail-container">
+          <div className="blog-detail-header">
+            <h1 className="blog-detail-title">{blog.judul}</h1>
 
-          <div className="article-header-meta">
-            <a href="/aktivitas/artikel/kategoriartikel" className="article-category">
-              Kategori
-            </a>
+            {blog.ringkasan && (
+              <div className="blog-detail-ringkasan">
+                <p>{blog.ringkasan}</p>
+              </div>
+            )}
 
-            <h1 className="article-title">
-              Judul Artikel 
-            </h1>
-
-            <p className="article-author-date">
-              Oleh Tamisa Ulinda | 10 November 2025
-            </p>
+            <div className="blog-detail-meta">
+              <span className="blog-detail-author">{blog.nama_pembuat}</span>
+              <span className="blog-detail-separator">•</span>
+              <span className="blog-detail-date">{formatDate(blog.dibuat_pada)}</span>
+            </div>
           </div>
 
-          <div className="article-image-main">
-            Gambar Utama Artikel
+          {blog.foto_cover && (
+            <div className="blog-detail-image">
+              <img
+                src={`${import.meta.env.VITE_API_BLOG || import.meta.env.VITE_API_PENGELOAAN_KONTEN}${blog.foto_cover}`}
+                alt={blog.judul}
+                loading="eager"
+              />
+            </div>
+          )}
+
+          <div className="blog-detail-content">
+            <div
+              className="blog-detail-isi"
+              dangerouslySetInnerHTML={{
+                __html: blog.isi?.replace(
+                  /src="\/images\//g,
+                  `src="${import.meta.env.VITE_API_BLOG || import.meta.env.VITE_API_PENGELOAAN_KONTEN}/images/`
+                ) || ''
+              }}
+            />
           </div>
 
-          <div className="article-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...
-            </p>
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...
-            </p>
+          <div className="blog-detail-footer">
+            {blog.kategori && blog.kategori.length > 0 && (
+              <div className="blog-detail-tags">
+                <span className="blog-detail-tags-label">Kategori:</span>
+                <div className="blog-detail-tags-list">
+                  {blog.kategori.map((kat) => (
+                    <span key={kat.id} className="blog-detail-tag">
+                      {kat.nama_kategori}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {blog.tag && blog.tag.length > 0 && (
+              <div className="blog-detail-tags">
+                <span className="blog-detail-tags-label">Tag:</span>
+                <div className="blog-detail-tags-list">
+                  {blog.tag.map((tag) => (
+                    <span key={tag.id} className="blog-detail-tag">
+                      {tag.nama_tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+        </article>
 
-          <div className="article-tags">
-            <span>Tag:</span>
-
-            <a href="/aktivitas/artikel/tagartikel" className="tag-pill">Sejarah</a>
-            <a href="/tag/politik" className="tag-pill">Politik</a>
-            <a href="/tag/budaya" className="tag-pill">Budaya</a>
-          </div>
-        </div>
-
-        <section className="related-articles-section">
-          <h2>Artikel Terkait</h2>
-
-          <div className="related-grid">
-            {relatedArticles.map((item, index) => (
-              <a href={item.link} className="related-card" key={index}>
-                <div className="related-image-placeholder">Gambar Terkait</div>
-
-                <h3>{item.title}</h3>
-                <p>
-                  Oleh {item.author} | {item.date}
-                </p>
-              </a>
+        {blog.related && blog.related.length > 0 && (
+          <section className="blog-detail-related">
+            <h2 className="blog-detail-related-title">Blog Terkait</h2>
+            <div className="blog-detail-related-grid">
+              {blog.related.map((related) => (
+                <Link
+                  to={`/blog/${related.tautan}`}
+                  className="blog-detail-related-card"
+                  key={related.id}
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  {related.foto_cover && (
+                    <div className="blog-detail-related-image">
+                      <img
+                        src={`${import.meta.env.VITE_API_BLOG || import.meta.env.VITE_API_PENGELOAAN_KONTEN}${related.foto_cover}`}
+                        alt={related.judul}
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div className="blog-detail-related-body">
+                    <h3 className="blog-detail-related-title-card">{related.judul}</h3>
+                    <p className="blog-detail-related-date">
+                      {formatDate(related.dibuat_pada)}
+                    </p>
+                  </div>
+                </Link>
             ))}
           </div>
         </section>
-
-      </div>
+        )}
+      </section>
     </main>
   );
-}
+};
 
 export default DetailArtikel;

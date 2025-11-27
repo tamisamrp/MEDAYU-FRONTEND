@@ -1,66 +1,107 @@
-import React from "react";
-import "./Artikel.css"; 
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import "./Artikel.css";
 
 const ArtikelPage = () => {
-  const articles = [
-    {
-      date: "30 Juni 2025",
-      title: "Judul Artikel Pertama",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
-      link: "/aktivitas/artikel/detailartikel",
-    },
-    {
-      date: "02 Juli 2025",
-      title: "Judul Artikel Kedua",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
-      link: "/artikel/detail/judul-artikel-kedua",
-    },
-    {
-      date: "28 Juni 2025",
-      title: "Judul Artikel Ketiga yang Lebih Panjang",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
-      link: "/artikel/detail/judul-artikel-ketiga",
-    },
-    {
-      date: "30 Juni 2025",
-      title: "Artikel Keempat Tentang Perpustakaan",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
-      link: "/artikel/detail/artikel-keempat",
-    },
-  ];
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_BLOG}/API/blog`);
+        if (!response.ok) {
+          throw new Error("Gagal mengambil data blog");
+        }
+
+        const data = await response.json();
+        setArticles(data?.data || []);
+      } catch (err) {
+        console.error(err);
+        setError(err.message || "Terjadi kesalahan");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('id-ID', options);
+  };
 
   return (
-    <main className="page-content">
-      <div className="container">
-        <h1>Artikel</h1>
+    <main className="blog-main">
+      <section className="blog-section">
+        <div className="blog-header">
+          <h1 className="blog-title">Blog</h1>
+        </div>
 
-        <section className="article-grid">
-          {articles.map((item, index) => (
-            <div className="article-card" key={index}>
-              <div className="article-image-placeholder">
-                Gambar Artikel
-              </div>
-
-              <div className="article-info">
-                <div>
-                  <span className="date">
-                    <span className="material-symbols-rounded"></span>
-                    {item.date}
-                  </span>
-
-                  <h3>{item.title}</h3>
-
-                  <p>{item.desc}</p>
-                </div>
-
-                <a href={item.link} className="read-more-btn">
-                  Read More
-                </a>
-              </div>
+        {loading && (
+          <div className="blog-state">
+            <div className="blog-skeleton-grid">
+              {[1, 2, 3, 4].map((item) => (
+                <div key={item} className="blog-skeleton-card" />
+              ))}
             </div>
-          ))}
-        </section>
-      </div>
+          </div>
+        )}
+
+        {error && !loading && (
+          <div className="blog-state blog-state-error">
+            <p>{error}</p>
+          </div>
+        )}
+
+        {!loading && !error && (
+          <>
+            {articles.length === 0 ? (
+              <div className="blog-state">
+                <p>Belum ada blog yang tersedia.</p>
+              </div>
+            ) : (
+              <div className="blog-grid">
+                {articles.map((article) => (
+                  <article className="blog-card" key={article.id}>
+                    <div className="blog-card-image">
+                      {article.foto_cover && (
+                        <img
+                          src={`${import.meta.env.VITE_API_BLOG}${article.foto_cover}`}
+                          alt={article.judul}
+                          loading="lazy"
+                        />
+                      )}
+                    </div>
+                    <div className="blog-card-body">
+                      <div className="blog-card-meta">
+                        <span className="blog-card-date">
+                          {formatDate(article.dibuat_pada)}
+                        </span>
+                        <span className="blog-card-author">
+                          {article.nama_pembuat}
+                        </span>
+                      </div>
+                      <h2 className="blog-card-title">{article.judul}</h2>
+                      <p className="blog-card-desc">{article.ringkasan}</p>
+                      <Link
+                        to={`/blog/${article.tautan}`}
+                        className="blog-card-link"
+                      >
+                        Baca Selengkapnya
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </section>
     </main>
   );
 };

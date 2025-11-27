@@ -1,167 +1,354 @@
-import React, { useState } from 'react';
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 import './PencarianKoran.css';
 
-const newspaperCategories = [
-    { name: 'Kompas', href: '#' },
-    { name: 'Jawa Pos', href: '#' },
-    { name: 'Surya', href: '#' },
-    { name: 'Media Indonesia', href: '#' },
-    { name: 'Tempo Harian', href: '#' },
+const BULAN_OPTIONS = [
+    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
 ];
 
-// hasil pencarian
-const dummyResults = [
-    { publisher: 'Jawa Pos', month: 'Januari', year: 1980, status: 'Tersedia' },
-    { publisher: 'Jawa Pos', month: 'Februari', year: 1980, status: 'Tersedia' },
-    { publisher: 'Kompas', month: 'Maret', year: 1985, status: 'Tersedia' },
-];
-
+const TAHUN_OPTIONS = [];
+const currentYear = new Date().getFullYear();
+for (let year = 1950; year <= currentYear; year++) {
+    TAHUN_OPTIONS.push(year);
+}
+TAHUN_OPTIONS.reverse();
 
 function PencarianKoran() {
-    const [publisher, setPublisher] = useState('');
-    const [year, setYear] = useState('');
-    const [month, setMonth] = useState('');
+    const [penerbitKoran, setPenerbitKoran] = useState([]);
+    const [koleksiKoran, setKoleksiKoran] = useState([]);
+    const [koleksiTerbaru, setKoleksiTerbaru] = useState([]);
+    const [idPenerbitKoran, setIdPenerbitKoran] = useState('');
+    const [tahun, setTahun] = useState('');
+    const [bulan, setBulan] = useState('');
     const [showResults, setShowResults] = useState(false);
-    
-    const [results, setResults] = useState(dummyResults);
+    const [results, setResults] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [searchLoading, setSearchLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
+    const apiUrl = import.meta.env.VITE_API_E_KATALOG;
+
+    useEffect(() => {
+        const fetchPenerbit = async () => {
+            try {
+                if (!apiUrl) {
+                    throw new Error('URL API tidak dikonfigurasi');
+                }
+
+                const response = await fetch(`${apiUrl}/API/penerbit-koran`);
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil data penerbit koran');
+                }
+
+                const data = await response.json();
+                const penerbitList = data?.penerbitKoran || [];
+                const formattedPenerbit = penerbitList.map(p => ({
+                    id: p.id,
+                    nama_penerbit: p.nama_penerbit
+                }));
+                setPenerbitKoran(formattedPenerbit);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchPenerbit();
+    }, [apiUrl]);
+
+    useEffect(() => {
+        const fetchKoleksi = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+
+                if (!apiUrl) {
+                    throw new Error('URL API tidak dikonfigurasi');
+                }
+
+                const response = await fetch(`${apiUrl}/API/new-koran`);
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil data koleksi koran');
+                }
+
+                const data = await response.json();
+                const koleksi = data?.data || [];
+                setKoleksiKoran(koleksi);
+                setKoleksiTerbaru(koleksi.slice(0, 6));
+            } catch (err) {
+                console.error(err);
+                setError(err.message || 'Terjadi kesalahan');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchKoleksi();
+    }, [apiUrl]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         
-        const isSearching = publisher || year || month;
-        
-        if (isSearching) {
-            
+        if (!idPenerbitKoran && !tahun && !bulan) {
+            setShowResults(false);
+            return;
+        }
+
+        try {
+            setSearchLoading(true);
+            setError(null);
+
+            const response = await fetch(`${apiUrl}/API/koran/search`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id_penerbit_koran: idPenerbitKoran || null,
+                    tahun: tahun || null,
+                    bulan: bulan || null
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Gagal mencari koran');
+            }
+
+            const data = await response.json();
+            setResults(data?.koran || []);
             setShowResults(true);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            setShowResults(false);
+        } catch (err) {
+            console.error(err);
+            setError(err.message || 'Terjadi kesalahan saat mencari');
+        } finally {
+            setSearchLoading(false);
         }
     };
 
     const handleClearSearch = (e) => {
         e.preventDefault();
-        
-        setPublisher('');
-        setYear('');
-        setMonth('');
-        
+        setIdPenerbitKoran('');
+        setTahun('');
+        setBulan('');
         setShowResults(false);
+        setResults([]);
+        setError(null);
+    };
+
+    const getPenerbitName = (id) => {
+        if (!id) return '';
+        const penerbit = penerbitKoran.find(p => p.id === parseInt(id));
+        return penerbit?.nama_penerbit || 'Tidak diketahui';
     };
 
     return (
         <>
             <div className="hero-koran-search">
                 <div className="container">
-                    <h1>Temukan Koleksi Pustaka Kami</h1>
-                    <p>Jelajahi ribuan koran yang tersedia.</p>
+                    <div className="hero-koran-content">
+                        <h1>Temukan Koleksi Pustaka Kami</h1>
+                        <p>Jelajahi ribuan koran yang tersedia di perpustakaan kami.</p>
+                    </div>
                     
                     <form className="koran-search-form" onSubmit={handleSubmit}>
                         <div className="koran-filters-wrapper">
-                            
-                            {/* filter penerbit koran */}
                             <div className="filter-group">
-                                <span className="material-symbols-rounded">search</span>
                                 <select 
                                     className="koran-select" 
                                     id="penerbitKoran"
-                                    value={publisher}
-                                    onChange={(e) => setPublisher(e.target.value)}
+                                    value={idPenerbitKoran}
+                                    onChange={(e) => setIdPenerbitKoran(e.target.value)}
                                 >
-                                    <option value="">Penerbit koran</option>
-                                    <option value="jawapos">Jawa Pos</option>
-                                    <option value="kompas">Kompas</option>
+                                    <option value="">Pilih Penerbit</option>
+                                    {penerbitKoran.map((penerbit) => (
+                                        <option key={penerbit.id} value={penerbit.id}>
+                                            {penerbit.nama_penerbit}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
 
-                            {/* tahun */}
                             <div className="filter-group">
-                                <span className="material-symbols-rounded">calendar_today</span>
-                                <input 
-                                    type="text" 
-                                    placeholder="Tahun" 
-                                    className="koran-input" 
+                                <select 
+                                    className="koran-select" 
                                     id="tahunKoran"
-                                    value={year}
-                                    onChange={(e) => setYear(e.target.value)}
-                                />
+                                    value={tahun}
+                                    onChange={(e) => setTahun(e.target.value)}
+                                >
+                                    <option value="">Pilih Tahun</option>
+                                    {TAHUN_OPTIONS.map((year) => (
+                                        <option key={year} value={year}>
+                                            {year}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
-                            {/* bulan */}
                             <div className="filter-group">
-                                <span className="material-symbols-rounded">calendar_month</span>
-                                <input 
-                                    type="text" 
-                                    placeholder="Bulan" 
-                                    className="koran-input" 
+                                <select 
+                                    className="koran-select" 
                                     id="bulanKoran"
-                                    value={month}
-                                    onChange={(e) => setMonth(e.target.value)}
-                                />
+                                    value={bulan}
+                                    onChange={(e) => setBulan(e.target.value)}
+                                >
+                                    <option value="">Pilih Bulan</option>
+                                    {BULAN_OPTIONS.map((bulanItem) => (
+                                        <option key={bulanItem} value={bulanItem}>
+                                            {bulanItem}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             
-                            <button type="submit" className="btn-cari">Cari</button>
+                            <button 
+                                type="submit" 
+                                className="btn-cari"
+                                disabled={searchLoading}
+                            >
+                                {searchLoading ? 'Mencari...' : 'Cari'}
+                            </button>
                         </div>
                     </form>
-                    
                 </div>
             </div>
 
             <main className="page-content">
                 <div className="container">
-                    
-                    {!showResults && (
-                        <div id="koranCategories">
-                            <h2 className="section-title">Koleksi Koran</h2>
-                            
-                            <div className="koran-grid">
-                                {newspaperCategories.map((koran) => (
-                                    <a href={koran.href} className="koran-card" key={koran.name}>
-                                        <div className="koran-image-wrapper"></div>
-                                        <div className="koran-info"><h3>{koran.name}</h3></div>
-                                    </a>
+                    {error && (
+                        <div className="koran-error">
+                            <p>{error}</p>
+                        </div>
+                    )}
+
+                    {loading && (
+                        <div className="koran-skeleton-section">
+                            <div className="koran-skeleton-title"></div>
+                            <div className="koran-skeleton-grid">
+                                {[1, 2, 3, 4, 5, 6].map((item) => (
+                                    <div key={item} className="koran-skeleton-card" />
                                 ))}
                             </div>
                         </div>
                     )}
+
+                    {!loading && !error && !showResults && (
+                        <>
+                            {koleksiTerbaru.length > 0 && (
+                                <div id="koranTerbaru">
+                                    <div className="section-header">
+                                        <h2 className="section-title">Koleksi Koran Terbaru</h2>
+                                        <p className="section-description">Jelajahi koleksi koran terbaru yang tersedia di perpustakaan kami</p>
+                                    </div>
+                                    <div className="koran-grid">
+                                        {koleksiTerbaru.map((koran) => (
+                                            <div className="koran-card" key={koran.id}>
+                                                <div className="koran-image-wrapper">
+                                                    {koran.foto && (
+                                                        <img 
+                                                            src={`${apiUrl}/images/penerbit-koran/${koran.foto}`}
+                                                            alt={koran.nama_penerbit}
+                                                            loading="lazy"
+                                                        />
+                                                    )}
+                                                </div>
+                                                <div className="koran-info">
+                                                    <h3>{koran.nama_penerbit}</h3>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {koleksiTerbaru.length === 0 && (
+                                <div className="koran-empty">
+                                    <p>Belum ada koleksi koran yang tersedia.</p>
+                                </div>
+                            )}
+                        </>
+                    )}
                     
-                    {showResults && (
+                    {!loading && showResults && (
                         <div id="koranResults">
                             <div className="results-header">
                                 <h2 className="section-title">Hasil Pencarian</h2>
-                                <a href="#" className="btn-hapus" onClick={handleClearSearch}>
+                                <button 
+                                    type="button"
+                                    className="btn-hapus" 
+                                    onClick={handleClearSearch}
+                                >
                                     <span className="material-symbols-rounded">close</span> Hapus Pencarian
-                                </a>
+                                </button>
                             </div>
                             
-                            <table className="koran-results-table">
-                                <thead>
-                                    <tr>
-                                        <th>Penerbit</th>
-                                        <th>Bulan</th>
-                                        <th>Tahun</th>
-                                        <th>Ketersediaan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {results.map((result, index) => (
-                                        <tr key={index}>
-                                            <td data-label="Penerbit">{result.publisher}</td>
-                                            <td data-label="Bulan">{result.month}</td>
-                                            <td data-label="Tahun">{result.year}</td>
-                                            <td data-label="Ketersediaan">
-                                                <span className={`ketersediaan-badge ${result.status === 'Tersedia' ? 'tersedia' : 'tidak-tersedia'}`}>
-                                                    {result.status}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            {results.length === 0 ? (
+                                <div className="koran-empty-not-found">
+                                    <p>Data koran yang Anda cari tidak ada.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="koran-results-wrapper koran-results-desktop">
+                                        <table className="koran-results-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Penerbit</th>
+                                                    <th>Bulan</th>
+                                                    <th>Tahun</th>
+                                                    <th>Ketersediaan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {results.map((result, index) => (
+                                                    <tr key={result.id || index}>
+                                                        <td>{index + 1}</td>
+                                                        <td>{result.nama_penerbit || getPenerbitName(result.id_penerbit_koran)}</td>
+                                                        <td>{result.bulan}</td>
+                                                        <td>{result.tahun}</td>
+                                                        <td>
+                                                            <span className={`ketersediaan-badge ${result.ketersediaan === 'Tersedia' ? 'tersedia' : 'tidak-tersedia'}`}>
+                                                                {result.ketersediaan}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className="koran-results-mobile">
+                                        {results.map((result, index) => (
+                                            <div className="koran-result-card" key={result.id || index}>
+                                                <div className="result-card-row">
+                                                    <span className="result-label">No</span>
+                                                    <span className="result-value">{index + 1}</span>
+                                                </div>
+                                                <div className="result-card-row">
+                                                    <span className="result-label">Penerbit</span>
+                                                    <span className="result-value">{result.nama_penerbit || getPenerbitName(result.id_penerbit_koran)}</span>
+                                                </div>
+                                                <div className="result-card-row">
+                                                    <span className="result-label">Bulan</span>
+                                                    <span className="result-value">{result.bulan}</span>
+                                                </div>
+                                                <div className="result-card-row">
+                                                    <span className="result-label">Tahun</span>
+                                                    <span className="result-value">{result.tahun}</span>
+                                                </div>
+                                                <div className="result-card-row">
+                                                    <span className="result-label">Ketersediaan</span>
+                                                    <span className="result-value">
+                                                        <span className={`ketersediaan-badge ${result.ketersediaan === 'Tersedia' ? 'tersedia' : 'tidak-tersedia'}`}>
+                                                            {result.ketersediaan}
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
                         </div>
                     )}
-                    
                 </div>
             </main>
         </>
