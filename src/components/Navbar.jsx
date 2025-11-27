@@ -57,8 +57,8 @@ function Navbar() {
               </svg>
             </label>
             <ul className="dropdown-menu">
-              <li><NavLink to="/pengumuman" className="nav-link" onClick={closeMenu}>Pengumuman</NavLink></li>
-              <li><NavLink to="/artikel" className="nav-link" onClick={closeMenu}>Artikel</NavLink></li>
+              {/* <li><NavLink to="/pengumuman" className="nav-link" onClick={closeMenu}>Pengumuman</NavLink></li> */}
+              <li><NavLink to="/blog" className="nav-link" onClick={closeMenu}>Blog</NavLink></li>
               {/* <li><NavLink to="/magang" className="nav-link" onClick={closeMenu}>Magang</NavLink></li>
               <li><NavLink to="/kunjungan" className="nav-link" onClick={closeMenu}>Kunjungan</NavLink></li> */}
             </ul>

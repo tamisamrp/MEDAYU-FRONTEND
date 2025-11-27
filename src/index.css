@@ -20,9 +20,17 @@ html, body, #root {
   padding-top: 80px;
 }
 
+.content-no-navbar {
+  padding-top: 0;
+}
+
 @media (max-width: 768px) {
   .content {
     padding-top: 70px;
+  }
+
+  .content-no-navbar {
+    padding-top: 0;
   }
 }
 

@@ -28,40 +28,32 @@ import PencarianKoran from "./pages/koleksi/Koran/PencarianKoran";
 function App() {
   return (
     <>
-        <Navbar />
+      <Navbar />
 
-        <div className="content">
-          <Routes>
-            {/* Beranda */}
-            <Route path="/" element={<Beranda />} />
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Beranda />} />
+          <Route path="/pembina" element={<Pembina />} />
+          <Route path="/pengawas" element={<Pengawas />} />
+          <Route path="/pengurus" element={<Pengurus />} />
+          <Route path="/magang" element={<Magang />} />
+          <Route path="/magang/detailmagang" element={<DetailMagang />} />
+          <Route path="/pengumuman" element={<Pengumuman />} />
+          <Route path="/pengumuman/detailpengumuman" element={<DetailPengumuman />} />
+          <Route path="/blog" element={<Artikel />} />
+          <Route path="/blog/:tautan" element={<DetailArtikel />} />
+          <Route path="/blog/kategoriartikel" element={<KategoriArtikel />} />
+          <Route path="/blog/tagartikel" element={<TagArtikel />} />
+          <Route path="/kunjungan" element={<Kunjungan />} />
+          <Route path="/kunjungan/detailkunjungan" element={<DetailKunjungan />} />
+          <Route path="/bukumajalah" element={<PencarianBukuMajalah />} />
+          <Route path="/buku-majalah/detailbuku" element={<DetailBuku />} />
+          <Route path="/buku-majalah/detailmajalah" element={<DetailMajalah />} />
+          <Route path="/koran" element={<PencarianKoran />} />
+        </Routes>
+      </div>
 
-            {/* Profil */}
-            <Route path="/pembina" element={<Pembina />} />
-            <Route path="/pengawas" element={<Pengawas />} />
-            <Route path="/pengurus" element={<Pengurus />} />
-
-            {/* Aktvitas */}
-            <Route path="/magang" element={<Magang />} />
-            <Route path="/magang/detailmagang" element={<DetailMagang />} />
-            <Route path="/pengumuman" element={<Pengumuman />} />
-            <Route path="/pengumuman/detailpengumuman" element={<DetailPengumuman />} />
-            <Route path="/artikel" element={<Artikel />} />
-            <Route path="/artikel/detailartikel" element={<DetailArtikel />} />
-            <Route path="/artikel/kategoriartikel" element={<KategoriArtikel />} />
-            <Route path="/artikel/tagartikel" element={<TagArtikel />} />
-            <Route path="/kunjungan" element={<Kunjungan />} />
-            <Route path="/kunjungan/detailkunjungan" element={<DetailKunjungan />} />
-
-            {/* Koleksi */}
-            <Route path="/bukumajalah" element={<PencarianBukuMajalah />} />
-            <Route path="/buku-majalah/detailbuku" element={<DetailBuku />} />
-            <Route path="/buku-majalah/detailmajalah" element={<DetailMajalah />} />
-            <Route path="/koran" element={<PencarianKoran />} />
-            
-          </Routes>
-        </div>
-
-        <Footer />
+      <Footer />
     </>
   );
 }

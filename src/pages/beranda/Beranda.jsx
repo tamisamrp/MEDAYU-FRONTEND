@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./Beranda.css";
-import SliderImage from "../../assets/slider.png";
+import SliderImage from "../../assets/slider.webp";
 import Slide1 from "../../assets/1.webp";
 import QrCodeDonasi from "../../assets/QRIS.jpg";
 

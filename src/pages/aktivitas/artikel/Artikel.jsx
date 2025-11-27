@@ -13,7 +13,7 @@ const ArtikelPage = () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_BLOG}/API/blog`);
         if (!response.ok) {
-          throw new Error("Gagal mengambil data artikel");
+          throw new Error("Gagal mengambil data blog");
         }
 
         const data = await response.json();
@@ -36,24 +36,24 @@ const ArtikelPage = () => {
   };
 
   return (
-    <main className="artikel-main">
-      <section className="artikel-section">
-        <div className="artikel-header">
-          <h1 className="artikel-title">Artikel</h1>
+    <main className="blog-main">
+      <section className="blog-section">
+        <div className="blog-header">
+          <h1 className="blog-title">Blog</h1>
         </div>
 
         {loading && (
-          <div className="artikel-state">
-            <div className="artikel-skeleton-grid">
+          <div className="blog-state">
+            <div className="blog-skeleton-grid">
               {[1, 2, 3, 4].map((item) => (
-                <div key={item} className="artikel-skeleton-card" />
+                <div key={item} className="blog-skeleton-card" />
               ))}
             </div>
           </div>
         )}
 
         {error && !loading && (
-          <div className="artikel-state artikel-state-error">
+          <div className="blog-state blog-state-error">
             <p>{error}</p>
           </div>
         )}
@@ -61,14 +61,14 @@ const ArtikelPage = () => {
         {!loading && !error && (
           <>
             {articles.length === 0 ? (
-              <div className="artikel-state">
-                <p>Belum ada artikel yang tersedia.</p>
+              <div className="blog-state">
+                <p>Belum ada blog yang tersedia.</p>
               </div>
             ) : (
-              <div className="artikel-grid">
+              <div className="blog-grid">
                 {articles.map((article) => (
-                  <article className="artikel-card" key={article.id}>
-                    <div className="artikel-card-image">
+                  <article className="blog-card" key={article.id}>
+                    <div className="blog-card-image">
                       {article.foto_cover && (
                         <img
                           src={`${import.meta.env.VITE_API_BLOG}${article.foto_cover}`}
@@ -77,20 +77,20 @@ const ArtikelPage = () => {
                         />
                       )}
                     </div>
-                    <div className="artikel-card-body">
-                      <div className="artikel-card-meta">
-                        <span className="artikel-card-date">
+                    <div className="blog-card-body">
+                      <div className="blog-card-meta">
+                        <span className="blog-card-date">
                           {formatDate(article.dibuat_pada)}
                         </span>
-                        <span className="artikel-card-author">
+                        <span className="blog-card-author">
                           {article.nama_pembuat}
                         </span>
                       </div>
-                      <h2 className="artikel-card-title">{article.judul}</h2>
-                      <p className="artikel-card-desc">{article.ringkasan}</p>
+                      <h2 className="blog-card-title">{article.judul}</h2>
+                      <p className="blog-card-desc">{article.ringkasan}</p>
                       <Link
-                        to={`/aktivitas/artikel/${article.tautan}`}
-                        className="artikel-card-link"
+                        to={`/blog/${article.tautan}`}
+                        className="blog-card-link"
                       >
                         Baca Selengkapnya
                       </Link>
