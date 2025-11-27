@@ -9,7 +9,7 @@ const Pengurus = () => {
   useEffect(() => {
     const fetchPengurus = async () => {
       try {
-        const response = await fetch("http://localhost:4201/API/pengurus");
+        const response = await fetch(`${import.meta.env.VITE_API_PENGELOAAN_KONTEN}/API/pengurus`);
         if (!response.ok) {
           throw new Error("Gagal mengambil data pengurus");
         }
@@ -63,7 +63,7 @@ const Pengurus = () => {
                     <div className="pengurus-card-image">
                       {pengurus.foto && (
                         <img
-                          src={`http://localhost:4201/images/anggota/${pengurus.foto}`}
+                          src={`${import.meta.env.VITE_API_PENGELOAAN_KONTEN}/images/anggota/${pengurus.foto}`}
                           alt={pengurus.nama}
                           loading="lazy"
                         />

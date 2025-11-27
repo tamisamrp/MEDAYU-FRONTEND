@@ -20,7 +20,7 @@ function Beranda() {
   useEffect(() => {
     const fetchHalamanUtama = async () => {
       try {
-        const response = await fetch("http://localhost:4201/API/halaman-utama");
+        const response = await fetch(`${import.meta.env.VITE_API_PENGELOAAN_KONTEN}/API/halaman-utama`);
         if (!response.ok) {
           throw new Error("Gagal mengambil data halaman utama");
         }
@@ -31,7 +31,7 @@ function Beranda() {
         const sortedHalamanUtama = halamanUtama.sort((a, b) => a.urutan - b.urutan);
         
         const apiSlides = sortedHalamanUtama.map((item) => 
-          `http://localhost:4201/images/halaman-utama/${item.foto}`
+          `${import.meta.env.VITE_API_PENGELOAAN_KONTEN}/images/halaman-utama/${item.foto}`
         );
         
         setSlides([SliderImage, ...apiSlides]);
