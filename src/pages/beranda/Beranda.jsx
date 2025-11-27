@@ -302,36 +302,41 @@ function Beranda() {
         )}
       </section>
 
-      <section className="info-section">
+      <section className="tentang-section">
         <div className="container">
-
           <h2>Tentang Perpustakaan Medayu Agung</h2>
 
           <div className="tentang-box">
+            <div className="tentang-image">
+              <img src={Slide1} alt="Perpustakaan" />
+            </div>
+
             <div className="tentang-text">
               <p>
                 Perpustakaan Medayu Agung Surabaya didirikan pada tahun 2001 oleh
                 Yayasan Medayu Agung Surabaya dalam upaya turut serta untuk
                 mencerdaskan kehidupan bangsa. Perpustakaan Medayu Agung disahkan
                 berdasarkan Keputusan Menteri Hukum dan Hak Asasi Manusia Republik
-                Indonesia Nomor AHU-0000761.AH.01.05. Tahun 2019. Nama “Medayu
-                Agung” memiliki makna kebajikan dan kebijaksanaan untuk tujuan
+                Indonesia Nomor AHU-0000761.AH.01.05. Tahun 2019. Nama "Medayu
+                Agung" memiliki makna kebajikan dan kebijaksanaan untuk tujuan
                 yang besar.
               </p>
-
-              <p>
-                Koleksi yang dimiliki oleh Perpustakaan Medayu Agung pada awalnya
-                berasal dari koleksi pribadi milik Bapak Oei Hiem Hwie. Koleksi
-                terkini berjumlah kurang lebih 10.000 eksemplar, belum termasuk
-                surat kabar, majalah dan foto-foto sejarah sejak tahun 1800-an.
-              </p>
-            </div>
-
-            <div className="tentang-image">
-              <img src={Slide1} alt="Perpustakaan" />
             </div>
           </div>
 
+          <div className="tentang-text-full">
+            <p>
+              Koleksi yang dimiliki oleh Perpustakaan Medayu Agung pada awalnya
+              berasal dari koleksi pribadi milik Bapak Oei Hiem Hwie. Koleksi
+              terkini berjumlah kurang lebih 10.000 eksemplar, belum termasuk
+              surat kabar, majalah dan foto-foto sejarah sejak tahun 1800-an.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="tujuan-section">
+        <div className="container">
           <h2>Tujuan</h2>
           <ol className="tujuan-list">
             <li>
@@ -346,7 +351,6 @@ function Beranda() {
               Ikut mendidik generasi muda mencintai ilmu pengetahuan.
             </li>
           </ol>
-
         </div>
       </section>
 
@@ -354,20 +358,24 @@ function Beranda() {
         <div className="container">
           <h2>Support kegiatan kami</h2>
 
-          <div className="qr-box">
-            <img
-              src={QrCodeDonasi}
-              alt="QR Code Donasi"
-            />
-          </div>
-          
-          <div className="bank-info">
-            <h3>Bank BCA</h3>
-            <p className="account-number">1234567890</p>
-            <p className="account-name">a.n. Yayasan Medayu Agung Surabaya</p>
+          <div className="support-content">
+            <div className="qr-box">
+              <img
+                src={QrCodeDonasi}
+                alt="QR Code Donasi"
+              />
+            </div>
+            
+            <div className="bank-info">
+              <p className="bank-description">Transfer ke bank dapat menggunakan:</p>
+              <h3>Bank BCA</h3>
+              <p className="account-number">1234567890</p>
+              <p className="account-name">a.n. Yayasan Medayu Agung Surabaya</p>
+            </div>
           </div>
 
-          <h4>Harap konfirmasi ke WhatsApp setelah melakukan donasi</h4>
+          <p className="support-note">Harap konfirmasi ke WhatsApp setelah melakukan donasi</p>
+
         </div>
       </section>
 
