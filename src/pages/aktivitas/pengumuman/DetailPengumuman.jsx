@@ -1,34 +1,140 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import "./DetailPengumuman.css";
 
 function DetailPengumuman() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [pengumuman, setPengumuman] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const apiUrl = import.meta.env.VITE_API_PENGELOAAN_KONTEN;
+
+  useEffect(() => {
+    const fetchDetailPengumuman = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        if (!apiUrl) {
+          throw new Error("URL API tidak dikonfigurasi");
+        }
+
+        if (!id) {
+          navigate("/pengumuman");
+          return;
+        }
+
+        const response = await fetch(`${apiUrl}/API/pengumuman/${id}`);
+        
+        if (!response.ok) {
+          if (response.status === 404) {
+            throw new Error("Pengumuman tidak ditemukan");
+          }
+          throw new Error("Gagal mengambil data pengumuman");
+        }
+
+        const data = await response.json();
+        setPengumuman(data?.pengumuman || null);
+      } catch (err) {
+        console.error("Error fetching detail pengumuman:", err);
+        setError(err.message || "Gagal memuat data pengumuman. Silakan coba lagi nanti.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDetailPengumuman();
+  }, [id, apiUrl, navigate]);
+
+  const formatTanggal = (tanggal) => {
+    if (!tanggal) return "";
+    
+    const date = new Date(tanggal);
+    const options = { 
+      year: "numeric", 
+      month: "long", 
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    };
+    
+    return date.toLocaleDateString("id-ID", options);
+  };
+
   return (
-    <main>
+    <main className="detail-pengumuman-main">
       <div className="container">
-        <Link to="/aktivitas/pengumuman" className="back-button">
-            ← Kembali
-        </Link>
-        <h1 className="page-title">Judul Pengumuman</h1>
+        <button className="pengumuman-detail-back-button" onClick={() => navigate("/pengumuman")}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span>Kembali</span>
+        </button>
 
-        <div className="detail-card-announcement">
-
-          <div className="announcement-image-container">
-            Gambar Cover Pengumuman
+        {loading && (
+          <div className="detail-skeleton-container">
+            <div className="detail-skeleton-header">
+              <div className="detail-skeleton-title"></div>
+              <div className="detail-skeleton-date"></div>
+            </div>
+            <div className="detail-skeleton-card">
+              <div className="detail-skeleton-image"></div>
+              <div className="detail-skeleton-content">
+                <div className="detail-skeleton-text"></div>
+                <div className="detail-skeleton-text"></div>
+                <div className="detail-skeleton-text short"></div>
+              </div>
+            </div>
           </div>
+        )}
 
-          <div className="announcement-description">
-            <p>
-              Isi Pengumuman: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        {error && !loading && (
+          <div className="detail-error-container">
+            <p className="error-message">
+              {error || "Pengumuman tidak ditemukan"}
             </p>
-            <p>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-              doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-              veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-            </p>
+            <button className="retry-button" onClick={() => navigate("/pengumuman")}>
+              Kembali ke Daftar Pengumuman
+            </button>
           </div>
-        </div>
+        )}
+
+        {!loading && !error && pengumuman && (
+          <>
+            <div className="detail-header">
+              <h1 className="page-title">{pengumuman.judul || "Tanpa Judul"}</h1>
+              {pengumuman.dibuat_pada && (
+                <span className="detail-date">
+                  {formatTanggal(pengumuman.dibuat_pada)}
+                </span>
+              )}
+            </div>
+
+            <div className="detail-card-announcement">
+              {pengumuman.foto && (
+                <div className="announcement-image-container">
+                  <img
+                    src={`${apiUrl}/images/pengumuman/${pengumuman.foto}`}
+                    alt={pengumuman.judul || "Gambar pengumuman"}
+                    loading="lazy"
+                  />
+                </div>
+              )}
+
+              {pengumuman.isi && (
+                <div className="announcement-description">
+                  <div 
+                    className="announcement-content-text"
+                    dangerouslySetInnerHTML={{ 
+                      __html: pengumuman.isi.replace(/\n/g, "<br />") 
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
 
       <div className="container">
