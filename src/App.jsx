@@ -39,16 +39,16 @@ function App() {
           <Route path="/magang" element={<Magang />} />
           <Route path="/magang/detailmagang" element={<DetailMagang />} />
           <Route path="/pengumuman" element={<Pengumuman />} />
-          <Route path="/pengumuman/detailpengumuman" element={<DetailPengumuman />} />
+          <Route path="/pengumuman/detail-pengumuman/:id" element={<DetailPengumuman />} />
           <Route path="/blog" element={<Artikel />} />
           <Route path="/blog/:tautan" element={<DetailArtikel />} />
           <Route path="/blog/kategoriartikel" element={<KategoriArtikel />} />
           <Route path="/blog/tagartikel" element={<TagArtikel />} />
           <Route path="/kunjungan" element={<Kunjungan />} />
-          <Route path="/kunjungan/detailkunjungan" element={<DetailKunjungan />} />
+          <Route path="/kunjungan/detail-kunjungan" element={<DetailKunjungan />} />
           <Route path="/bukumajalah" element={<PencarianBukuMajalah />} />
-          <Route path="/buku-majalah/detailbuku" element={<DetailBuku />} />
-          <Route path="/buku-majalah/detailmajalah" element={<DetailMajalah />} />
+          <Route path="/buku-majalah/detail-buku" element={<DetailBuku />} />
+          <Route path="/buku-majalah/detail-majalah" element={<DetailMajalah />} />
           <Route path="/koran" element={<PencarianKoran />} />
         </Routes>
       </div>
