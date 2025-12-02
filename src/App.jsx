@@ -37,7 +37,7 @@ function App() {
           <Route path="/pengawas" element={<Pengawas />} />
           <Route path="/pengurus" element={<Pengurus />} />
           <Route path="/magang" element={<Magang />} />
-          <Route path="/magang/detailmagang" element={<DetailMagang />} />
+          <Route path="/magang/detail-magang/:id" element={<DetailMagang />} />
           <Route path="/pengumuman" element={<Pengumuman />} />
           <Route path="/pengumuman/detail-pengumuman/:id" element={<DetailPengumuman />} />
           <Route path="/blog" element={<Artikel />} />
