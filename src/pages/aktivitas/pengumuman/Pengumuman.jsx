@@ -52,7 +52,7 @@ function Pengumuman() {
   };
 
   const handleCardClick = (id) => {
-    navigate(`/pengumuman/detail-pengumuman/${id}`);
+    navigate(`/detail-pengumuman/${id}`);
   };
 
   return (

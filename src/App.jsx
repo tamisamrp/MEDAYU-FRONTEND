@@ -37,15 +37,15 @@ function App() {
           <Route path="/pengawas" element={<Pengawas />} />
           <Route path="/pengurus" element={<Pengurus />} />
           <Route path="/magang" element={<Magang />} />
-          <Route path="/magang/detail-magang/:id" element={<DetailMagang />} />
+          <Route path="/detail-magang/:id" element={<DetailMagang />} />
           <Route path="/pengumuman" element={<Pengumuman />} />
-          <Route path="/pengumuman/detail-pengumuman/:id" element={<DetailPengumuman />} />
+          <Route path="/detail-pengumuman/:id" element={<DetailPengumuman />} />
           <Route path="/blog" element={<Artikel />} />
           <Route path="/blog/:tautan" element={<DetailArtikel />} />
           <Route path="/blog/kategoriartikel" element={<KategoriArtikel />} />
           <Route path="/blog/tagartikel" element={<TagArtikel />} />
           <Route path="/kunjungan" element={<Kunjungan />} />
-          <Route path="/kunjungan/detail-kunjungan" element={<DetailKunjungan />} />
+          <Route path="/detail-kunjungan/:id" element={<DetailKunjungan />} />
           <Route path="/bukumajalah" element={<PencarianBukuMajalah />} />
           <Route path="/buku-majalah/detail-buku" element={<DetailBuku />} />
           <Route path="/buku-majalah/detail-majalah" element={<DetailMajalah />} />

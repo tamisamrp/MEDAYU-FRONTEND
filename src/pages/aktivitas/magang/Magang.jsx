@@ -53,7 +53,7 @@ function Magang() {
   };
 
   const handleCardClick = (id) => {
-    navigate(`/magang/detail-magang/${id}`);
+    navigate(`/detail-magang/${id}`);
   };
 
   return (
